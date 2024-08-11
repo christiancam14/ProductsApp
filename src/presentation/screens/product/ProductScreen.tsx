@@ -1,6 +1,6 @@
 import {Text, View} from 'react-native';
 
-export const ProducScreen = () => {
+export const ProductScreen = () => {
   return (
     <View>
       <Text>ProducScreen</Text>

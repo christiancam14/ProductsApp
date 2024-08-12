@@ -12,6 +12,7 @@ import {
   ButtonGroup,
   Input,
   Layout,
+  Text,
   useTheme,
 } from '@ui-kitten/components';
 import {Product} from '../../../domain/entities/product';
@@ -19,6 +20,7 @@ import {MyIcon} from '../../components/ui/MyIcon';
 import {Formik} from 'formik';
 import {ProductImages} from '../../components/products/ProductImages';
 import {genders, sizes} from '../../../config/constants/constants';
+import {CameraAdapter} from '../../../config/adapters/camera-adapter';
 
 interface Props extends StackScreenProps<RootStackParams, 'ProductScreen'> {}
 
@@ -54,7 +56,14 @@ export const ProductScreen = ({route}: Props) => {
   return (
     <Formik initialValues={product} onSubmit={mutation.mutate}>
       {({handleChange, handleSubmit, values, errors, setFieldValue}) => (
-        <MainLayout title={values.title} subTitle={`${values.price}`}>
+        <MainLayout
+          title={values.title}
+          subTitle={`${values.price}`}
+          rightAction={async () => {
+            const photos = await CameraAdapter.getPicturesFromLibrary();
+            setFieldValue('images', [...values.images, ...photos]);
+          }}
+          rightActionIcon="camera-outline">
           <ScrollView style={{flex: 1}}>
             {/* Imagenes del producto */}
             <Layout
@@ -169,6 +178,8 @@ export const ProductScreen = ({route}: Props) => {
               style={{margin: 15}}>
               Guardar
             </Button>
+
+            <Text>{JSON.stringify(values, null, 2)}</Text>
 
             {/* Espaciado inferior */}
             <Layout style={{height: 200}} />

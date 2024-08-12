@@ -1,9 +1,10 @@
 import {Card, Text} from '@ui-kitten/components';
 import {Product} from '../../../domain/entities/product';
-import {Image} from 'react-native';
+import {Image, useColorScheme} from 'react-native';
 import {FadeInImage} from '../ui/FadeInImage';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParams} from '../../navigation/StackNavigator';
+import * as eva from '@eva-design/eva';
 
 interface Props {
   product: Product;
@@ -11,6 +12,8 @@ interface Props {
 
 export const ProductCard = ({product}: Props) => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === 'dark' ? eva.dark : eva.light;
 
   return (
     <Card
@@ -29,7 +32,9 @@ export const ProductCard = ({product}: Props) => {
           style={{flex: 1, height: 200, width: '100%'}}
         />
       )}
-      <Text numberOfLines={2} style={{textAlign: 'center'}}>
+      <Text
+        numberOfLines={2}
+        style={{textAlign: 'center', color: theme['color-basic-800']}}>
         {product.title}
       </Text>
     </Card>

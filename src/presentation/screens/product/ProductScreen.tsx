@@ -179,8 +179,6 @@ export const ProductScreen = ({route}: Props) => {
               Guardar
             </Button>
 
-            <Text>{JSON.stringify(values, null, 2)}</Text>
-
             {/* Espaciado inferior */}
             <Layout style={{height: 200}} />
           </ScrollView>

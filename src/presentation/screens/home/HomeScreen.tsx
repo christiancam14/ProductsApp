@@ -32,7 +32,9 @@ export const HomeScreen = () => {
     <>
       <MainLayout
         title="TesloShop - Products"
-        subTitle="Aplicación administrativa">
+        subTitle="Aplicación administrativa"
+        rightAction={() => logout()}
+        rightActionIcon="log-out-outline">
         {isLoading ? (
           <FullScreenLoader />
         ) : (
